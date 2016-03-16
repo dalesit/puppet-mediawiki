@@ -85,6 +85,7 @@ class mediawiki (
   $db_root_password,
   $doc_root       = $mediawiki::params::doc_root,
   $tarball_url    = $mediawiki::params::tarball_url,
+  $apache_user    = $mediawiki::params::apache_user,
   $package_ensure = 'latest',
   $max_memory     = '2048'
   ) inherits mediawiki::params {
@@ -121,8 +122,8 @@ class mediawiki (
   file { 'mediawiki_conf_dir':
     ensure  => 'directory',
     path    => $mediawiki::params::conf_dir,
-    owner   => 'apache',
-    group   => 'apache',
+    owner   => $mediawiki::params:,
+    group   => $apache_user,
     mode    => '0755',
     require => Package[$mediawiki::params::packages],
   }  
